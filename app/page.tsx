@@ -39,31 +39,50 @@ export default function Home() {
     setResult(null);
 
     try {
+      console.log("Frontend: Sending request to:", GAS_API_URL);
+      const requestBody = {
+        nickname,
+        ...Object.fromEntries(
+          Object.entries(answers).map(([key, value]) => [
+            key,
+            {
+              value,
+              text:
+                questions
+                  .find((q) => q.id === key)
+                  ?.options.find((o) => o.value === value)?.text || "",
+            },
+          ])
+        ),
+      };
+      console.log("Frontend: Request body:", requestBody);
+
       const response = await fetch(GAS_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          nickname,
-          ...Object.fromEntries(
-            Object.entries(answers).map(([key, value]) => [
-              key,
-              {
-                value,
-                text:
-                  questions
-                    .find((q) => q.id === key)
-                    ?.options.find((o) => o.value === value)?.text || "",
-              },
-            ])
-          ),
-        }),
+        body: JSON.stringify(requestBody),
       });
 
+      console.log("Frontend: Response status:", response.status);
+      console.log("Frontend: Response headers:", response.headers);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Frontend: Response error:", errorText);
+        setResult({
+          success: false,
+          error: `サーバーエラー: ${response.status} ${response.statusText}`,
+        });
+        return;
+      }
+
       const data = await response.json();
+      console.log("Frontend: Response data:", data);
       setResult(data);
     } catch (error) {
+      console.error("Frontend: Error occurred:", error);
       setResult({
         success: false,
         error: error instanceof Error ? error.message : "エラーが発生しました",
@@ -77,7 +96,7 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-          <h2 className="text-xl font-bold mb-4 text-center">
+          <h2 className="text-neutral text-xl font-bold mb-4 text-center">
             ニックネームを入力してください
           </h2>
           <input
@@ -85,7 +104,7 @@ export default function Home() {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
             placeholder="ニックネーム"
-            className="w-full p-3 border border-gray-300 rounded-lg mb-4"
+            className="text-neutral w-full p-3 border border-gray-300 rounded-lg mb-4"
             onKeyPress={(e) =>
               e.key === "Enter" && nickname && setShowNicknameModal(false)
             }
