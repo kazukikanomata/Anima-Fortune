@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# みにしみ動物占い
 
-## Getting Started
+## 概要
 
-First, run the development server:
+12 個の質問に答えることで、あなたの性格に最も近い動物タイプを診断する。
+診断結果は **8 種類の動物タイプ**からえらばれ、それぞれの詳細ページにリンクする。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 必達要件
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 気軽さを追求する
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+  - 導入としてつくりたい。障壁をできるだけなくしたい。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 何人回答したいのかもみたい。
 
-## Learn More
+  - 分析まではしない。
 
-To learn more about Next.js, take a look at the following resources:
+### あったらいいな要件
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 実行回数によって変動するので何度やっても飽きないものにしたい。
+- 回答結果をメールに送信する
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 検討する導線
 
-## Deploy on Vercel
+アンケート → ブログ →1on1 フォームに通じるようにしたい。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## デプロイ
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+https://anima-fortune.vercel.app/
+
+### 今後
+
+動物診断占いの有料版を見据えている
+
+## 参考
+
+スプシリンク
+
+- https://docs.google.com/spreadsheets/d/1nZKvZmK1biRGQ3iIZA8FjckFa-2MJ8ZMRC4lrFRyAwE/edit?gid=0#gid=0
+
+予定表
+
+- https://www.figma.com/board/CT59SCmsIi0wn6I91Sgjw2/%E5%8B%95%E7%89%A9%E5%8D%A0%E3%81%84?node-id=0-1&p=f&t=xdITSVZpAIRckXka-0

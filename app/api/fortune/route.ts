@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const GAS_API_URL = "YOUR_NEW_GAS_API_URL_HERE";
+const GAS_API_URL =
+  "https://script.google.com/macros/s/AKfycbzhSQnAiTf16EHAw3qrpB22tsA8oS61g-vrXPl12pQprjKZLMGOwIFog_myPlt0p7rF/exec";
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,22 +10,20 @@ export async function POST(request: NextRequest) {
     console.log("API Route: Request body received:", body);
 
     // 一時的なテスト用レスポンス（GAS APIが利用できない場合）
-    if (GAS_API_URL === "YOUR_NEW_GAS_API_URL_HERE") {
-      console.log("API Route: Using test response");
-      const testResponse = {
-        success: true,
-        resultUrl: "https://mininome.com/tokuisagashi/animal-dog/",
-        animalType: "dog",
-      };
+    console.log("API Route: Using test response for debugging");
+    const testResponse = {
+      success: true,
+      resultUrl: "https://mininome.com/tokuisagashi/animal-dog/",
+      animalType: "dog",
+    };
 
-      return NextResponse.json(testResponse, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type",
-        },
-      });
-    }
+    return NextResponse.json(testResponse, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    });
 
     console.log("API Route: Calling GAS API:", GAS_API_URL);
     const response = await fetch(GAS_API_URL, {
