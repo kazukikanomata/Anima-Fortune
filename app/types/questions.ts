@@ -1,13 +1,7 @@
-// 質問と選択肢の型を定義
-export type Option = {
-  value: string;
-  text: string;
-};
-
 export type Question = {
   id: string;
   title: string;
-  options: Option[];
+  options: { value: string; text: string }[];
 };
 
 export const questions: Question[] = [
