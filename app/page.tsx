@@ -1,8 +1,6 @@
 "use client";
-
 import { useState } from "react";
-import { questions, type Question } from "./questions";
-
+import { questions } from "./types/questions";
 import { GAS_API_URL, ANIMAL_TYPE_MAP, type AnimalType } from "./config";
 import { QuestionAccordion } from "./components/QuestionAccordion";
 
@@ -23,17 +21,8 @@ export default function Home() {
   };
 
   const handleSubmit = async () => {
-    if (!nickname) {
-      alert("ニックネームを入力してください");
-      return;
-    }
-
+    // ニックネーム入力チェック
     // 全ての質問に回答しているかチェック
-    const unansweredQuestions = questions.filter((q) => !answers[q.id]);
-    if (unansweredQuestions.length > 0) {
-      alert("全ての質問に回答してください");
-      return;
-    }
 
     setIsLoading(true);
     setResult(null);
@@ -57,7 +46,7 @@ export default function Home() {
       };
       console.log("Frontend: Request body:", requestBody);
 
-      const response = await fetch(GAS_API_URL, {
+      const response = await fetch("/api/fortune", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,10 +68,8 @@ export default function Home() {
       }
 
       const data = await response.json();
-      console.log("Frontend: Response data:", data);
       setResult(data);
     } catch (error) {
-      console.error("Frontend: Error occurred:", error);
       setResult({
         success: false,
         error: error instanceof Error ? error.message : "エラーが発生しました",
@@ -182,7 +169,7 @@ export default function Home() {
           }}
           className="space-y-4"
         >
-          {questions.map((question, index) => (
+          {questions.map((question, index: number) => (
             <QuestionAccordion
               key={question.id}
               question={question}
