@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Question } from "../types/questions";
+import { Question } from "../../types/questions";
 
 type Props = {
   question: Question;
